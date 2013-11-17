@@ -147,6 +147,24 @@
 			return null;
 		}
 	}
+	
+	function find_player_by_id($player_id) {
+		global $connection;
+		
+		$safe_player_id = mysqli_real_escape_string($connection, $player_id);
+		
+		$query  = "SELECT * ";
+		$query .= "FROM players ";
+		$query .= "WHERE id = {$safe_player_id} ";
+		$query .= "LIMIT 1";
+		$player_set = mysqli_query($connection, $query);
+		confirm_query($player_set);
+		if($player = mysqli_fetch_assoc($player_set)) {
+			return $player;
+		} else {
+			return null;
+		}
+	}
 
 	function find_admin_by_username($username) {
 		global $connection;

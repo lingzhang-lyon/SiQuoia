@@ -1,0 +1,244 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1038\cocoasubrtf360
+{\fonttbl\f0\fswiss\fcharset0 ArialMT;\f1\froman\fcharset0 TimesNewRomanPSMT;}
+{\colortbl;\red255\green255\blue255;\red106\green168\blue79;\red255\green0\blue0;\red0\green0\blue255;
+}
+\vieww12240\viewh14820\viewkind1
+\deftab720
+\pard\pardeftab720\ri0\sl276\slmult1
+
+\f0\b\fs22 \cf2 1. Create Database:
+\b0 \cf0 \
+
+\b \cf2 \
+\pard\pardeftab720\ri0\sl276\slmult1
+
+\b0 \cf0 $ mysql --version\
+$ mysql -u root -p\
+mysql> SHOW DATABASES;\
+mysql> CREATE DATABASE \cf3 siquoia\cf0 ;\
+mysql> USE siquoia\
+mysql> GRANT ALL PRIVILEGES ON siquoia.*\
+   	-> TO \cf3 'group19\cf0 '@'localhost'\
+       -> IDENTIFIED BY '\cf3 sjsugroup19\cf0 ';\
+mysql> SHOW GRANTS FOR 'group19'@'localhost';\
+\
+mysql> exit;\
+\
+$ mysql -u group19 -p\
+Enter password:\
+\
+mysql> SHOW DATABASES;\
+mysql> USE siquoia\
+\
+\pard\pardeftab720\ri0\sl276\slmult1
+
+\b \cf2 2. Create Tables:\
+\
+\pard\pardeftab720\ri0\sl276\slmult1
+
+\b0 \cf0 --\
+\pard\pardeftab720\ri0\sl276\slmult1
+
+\b \cf0 -- Table structure for table `\cf3 admins\cf0 `\
+\pard\pardeftab720\ri0\sl276\slmult1
+
+\b0 \cf0 --\
+\
+DROP TABLE IF EXISTS `admins`;\
+CREATE TABLE `admins` (\
+  `id` int(11) NOT NULL AUTO_INCREMENT,\
+  `username` varchar(50) NOT NULL,\
+  `hashed_password` varchar(60) NOT NULL,\
+  PRIMARY KEY (`id`)\
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;\
+\
+--\
+\pard\pardeftab720\ri0\sl276\slmult1
+
+\b \cf0 -- Dumping data for table `admins`\
+\pard\pardeftab720\ri0\sl276\slmult1
+
+\b0 \cf0 --\
+\
+INSERT INTO `admins` VALUES (1,'kskoglund','$2y$10$NmZiNzcxMzhiY2E0NTg2YO9X4eeRSo03H6r0A5bqHkZnF1hI8sLX.'),(3,'johndoe','$2y$10$NTdmODYxZWQ0OGMwYmMxZ.Q3I4i0FtO/X9DWv1tpsF5hiS9LBXqmu');\
+\
+\
+\pard\pardeftab720\ri0\sl276\slmult1
+\cf4 \
+\pard\pardeftab720\ri0\sl276\slmult1
+\cf0 \
+\pard\pardeftab720\ri0\sl276\slmult1
+\cf3 --\
+-- Table structure for table `pages`\
+--\
+\pard\pardeftab720\ri0\sl276\slmult1
+\cf0 \
+\pard\pardeftab720\ri0\sl276\slmult1
+\cf3 DROP TABLE IF EXISTS `pages`;\
+CREATE TABLE `pages` (\
+  `id` int(11) NOT NULL AUTO_INCREMENT,\
+  `subject_id` int(11) NOT NULL,\
+  `menu_name` varchar(30) NOT NULL,\
+  `position` int(3) NOT NULL,\
+  `visible` tinyint(1) NOT NULL,\
+  `content` text,\
+  PRIMARY KEY (`id`),\
+  KEY `subject_id` (`subject_id`)\
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;\
+\
+--\
+-- Dumping data for table `pages`\
+--\
+\
+INSERT INTO `pages` VALUES (1,1,'Our Mission',1,1,'Our mission has always been...'),(2,1,'Our History',2,1,'Founded in 1898 by two enterprising engineers...\\r\\n\\r\\nMore recently...'),(3,2,'Large Widgets',1,1,'Our large widgets have to be seen to be believed...'),(4,2,'Small Widgets',2,1,'They say big things come in small packages...'),(5,3,'Retrofitting',1,1,'We love to replace widgets...'),(6,3,'Certification',2,0,'We can certify any widget, not just our own...');\
+\
+--\
+-- Table structure for table `subjects`\
+--\
+\
+DROP TABLE IF EXISTS `subjects`;\
+CREATE TABLE `subjects` (\
+  `id` int(11) NOT NULL AUTO_INCREMENT,\
+  `menu_name` varchar(30) NOT NULL,\
+  `position` int(3) NOT NULL,\
+  `visible` tinyint(1) NOT NULL,\
+  PRIMARY KEY (`id`)\
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;\
+\
+--\
+-- Dumping data for table `subjects`\
+--\
+\
+INSERT INTO `subjects` VALUES (1,'About Widget Corp',1,1),(2,'Products',2,1),(3,'Services',3,1),(6,'Today\\'s Widget Trivia',4,0);\
+\pard\pardeftab720\ri0\sl276\slmult1
+\cf0 \
+--\
+\pard\pardeftab720\ri0\sl276\slmult1
+
+\b \cf0 -- Table structure for table \cf3 players\cf0 \
+\pard\pardeftab720\ri0\sl276\slmult1
+
+\b0 \cf0 --\
+\
+DROP TABLE IF EXISTS players;\
+CREATE TABLE players (\
+ id int Not NULL AUTO_INCREMENT,\
+ username varchar(50) Not NULL,  \
+ hashed_password varchar(255) not NULL,  \
+ membership MEDIUMTEXT NOT NULL, \
+ points int Default NULL,\
+ credits int Default NULL,\
+ rank int Default NULL, \
+ PRIMARY KEY (id)\
+); \
+\
+Show columns from players;\
+\pard\pardeftab720\ri0\sl276\slmult1
+\cf4 \
+\pard\pardeftab720\ri0\sl276\slmult1
+\cf0 --\
+\pard\pardeftab720\ri0\sl276\slmult1
+
+\b \cf0 -- Dumping data for table players\
+\pard\pardeftab720\ri0\sl276\slmult1
+
+\b0 \cf0 --\
+\
+INSERT INTO  players(id,username,hashed_password,membership) \
+VALUES (1,'Bingyu','$2y$10$MzA0ODVlNTg0YTU1N2FhYeDzei3UNykWTTMN0E4G/siiXgkyp4r6y','standard'),\
+(2,'Binh','$2y$10$YWZmNWUyODYxYzYyZjY3N.cVnsN4XYN0d/.NTbLdnkRj5UBdpbfQm',
+\f1  
+\f0 'standard'),\
+(3,'Daniel','$2y$10$YzgxOTQxZTI4MzhkNGEyNOYkbU1q/0QhY/mJPgsimdsbFtmyhZ95C ','standard'),\
+(4,'Ling','$2y$10$Yzg0MjE4ZGVhOWFjMGM1Z./EIP6QvoyNdokfY7F5y7WpsBQbmR/De','standard'),\
+(5,'Sai','$2y$10$M2YxODQzZjY1ZDYxMDI0OO38thKXhmplxJwYVVdxjXkHn9pWSzhpK','standard'),\
+(6,'Steven','$2y$10$NjQwY2M0Mzg1MzJjMDZmYe6Uqk8goOGvgDp8kK1i5r/ClXiUacUBm','standard');\
+\
+Select * From players;\
+\pard\pardeftab720\ri0\sl276\slmult1
+\cf4 \
+\
+\
+\
+\
+\
+\pard\pardeftab720\ri0\sl276\slmult1\ql\qnatural
+\cf0 --\
+\pard\pardeftab720\ri0\sl276\slmult1\ql\qnatural
+
+\b \cf0 -- Table structure for table \cf3 categories\cf0 \
+\pard\pardeftab720\ri0\sl276\slmult1\ql\qnatural
+
+\b0 \cf0 --\
+\cf4 \
+\cf0 DROP TABLE IF EXISTS categories;\
+CREATE TABLE categories (\cf4 \
+\cf0 id int Not NULL AUTO_INCREMENT,\
+category_name varchar(50) not null,\
+category_level int not null,\
+parent_category_id int Default NULL,\
+PRIMARY KEY (id),\
+FOREIGN KEY (parent_category_id) REFERENCES categories(id)\
+);\
+\
+--\
+\pard\pardeftab720\ri0\sl276\slmult1\ql\qnatural
+
+\b \cf0 -- Dumping data for table \cf3 categories\cf0 \
+\pard\pardeftab720\ri0\sl276\slmult1\ql\qnatural
+
+\b0 \cf0 --\
+\
+INSERT INTO  categories (id, category_name,category_level,parent_category_id)\
+VALUES (1, 'Science', 1, NULL),(2, 'Math', 2, 1),(3, 'Primary Math', 3, 2);\
+\
+\
+\pard\pardeftab720\ri0\sl276\slmult1
+\cf0 --\
+\pard\pardeftab720\ri0\sl276\slmult1
+
+\b \cf0 -- Table structure for table \cf3 questions\cf0 \
+\pard\pardeftab720\ri0\sl276\slmult1
+
+\b0 \cf0 --\
+\
+DROP TABLE IF EXISTS questions;\
+CREATE TABLE questions (\
+id int Not NULL AUTO_INCREMENT,\
+player_id int Default NULL,\
+question_content Text Not NULL,\
+option1 Text Not NULL,\
+option2 Text Not NULL,\
+option3 Text Not NULL,\
+option4 Text Not NULL,\
+correct_option int Not NULL, \
+status varchar(50) default 'nonapproved',\
+category_id int Not Null,\
+level int Default Null,\
+PRIMARY KEY (id),\
+FOREIGN KEY (player_id) REFERENCES players(id),\
+\pard\pardeftab720\ri0\sl276\slmult1\ql\qnatural
+\cf0 FOREIGN KEY (category_id) REFERENCES categories(id)\
+\pard\pardeftab720\ri0\sl276\slmult1
+\cf0 ); \
+\pard\pardeftab720\ri0\sl276\slmult1
+\cf4 \
+-- remember that the last item in sql should not end with \'93,\'94\
+\
+\
+\pard\pardeftab720\ri0\sl276\slmult1
+\cf0 --\
+\pard\pardeftab720\ri0\sl276\slmult1
+
+\b \cf0 -- Dumping data for table \cf3 questions\cf0 \
+\pard\pardeftab720\ri0\sl276\slmult1
+
+\b0 \cf0 --\
+\pard\pardeftab720\ri0\sl276\slmult1
+\cf4 \
+\pard\pardeftab720\ri0\sl276\slmult1
+\cf0 INSERT INTO  questions (id,question_content,option1, option2, option3, option4,correct_option,status,category_id, level) \
+VALUES (1,'what is 1+1?','is 1','is 2','is 3','is 4','2','approved', 3, 0);\
+\pard\pardeftab720\ri0\sl276\slmult1
+\cf4 \
+}

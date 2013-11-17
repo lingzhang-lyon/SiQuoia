@@ -2,14 +2,14 @@
 <?php require_once("../includes/db_connection.php"); ?>
 <?php require_once("../includes/functions.php"); ?>
 <?php require_once("../includes/validation_functions.php"); ?>
-
+<?php confirm_logged_in(); ?>
 
 <?php
 if (isset($_POST['submit'])) {
   // Process the form
   
   // validations
-  $required_fields = array("username", "password");
+  $required_fields = array("username", "password", "membership");
   validate_presences($required_fields);
   
   $fields_with_max_lengths = array("username" => 30);
@@ -20,22 +20,22 @@ if (isset($_POST['submit'])) {
 
     $player_username = mysql_prep($_POST["username"]);
     $player_hashed_password = password_encrypt($_POST["password"]);
+	$player_membership = $_POST["membership"];
     
     $query  = "INSERT INTO players (";
-    $query .= "  username, hashed_password, membership";
+    $query .= "  username, hashed_password,membership";
     $query .= ") VALUES (";
-    $query .= "  '{$player_username}', '{$player_hashed_password}','trial'";
+    $query .= "  '{$player_username}', '{$player_hashed_password}','{$player_membership}'";
     $query .= ")";
     $result = mysqli_query($connection, $query);
 
     if ($result) {
       // Success
-	  $_SESSION["player_username"] = $player_username;
-	  $_SESSION["player_hashed_password"] = $player_hashed_password;
-      redirect_to("player.php");
+      $_SESSION["message"] = "player created.";
+      redirect_to("manage_players.php");
     } else {
       // Failure
-      $_SESSION["message"] = "Player account creation failed.";
+      $_SESSION["message"] = "Player creation failed.";
     }
   }
 } else {
@@ -45,29 +45,33 @@ if (isset($_POST['submit'])) {
 
 ?>
 
-<?php $layout_context = "player"; ?>
+<?php $layout_context = "admin"; ?>
 <?php include("../includes/layouts/header.php"); ?>
 <div id="main">
   <div id="navigation">
-	<br />
-	<a href="index.php">&laquo; Main Page</a><br />
+    &nbsp;
   </div>
   <div id="page">
     <?php echo message(); ?>
     <?php echo form_errors($errors); ?>
     
-    <h2>Registration</h2>
-    <form action="registration.php" method="post">
+    <h2>Create Player</h2>
+    <form action="new_player.php" method="post">
       <p>Username:
         <input type="text" name="username" value="" />
       </p>
       <p>Password:
         <input type="password" name="password" value="" />
-      </p>
-      <input type="submit" name="submit" value="Create your player account" />
+	  </p>
+	  <p>Membership:
+		<input type="radio" name="membership" value="trial" /> Trial
+		&nbsp;
+		<input type="radio" name="membership" value="standard" /> Standard
+	  </p>
+      <input type="submit" name="submit" value="Create Player" />
     </form>
     <br />
-    <a href="index.php">Cancel</a>
+    <a href="manage_players.php">Cancel</a>
   </div>
 </div>
 
