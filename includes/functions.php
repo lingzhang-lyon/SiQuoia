@@ -88,6 +88,62 @@
 		return $player_set;
 	}
 	
+	function find_all_level1_category() {
+		global $connection;
+		
+		$query  = "SELECT * ";
+		$query .= "FROM categories ";
+		$query .= "WHERE category_level = 1 ";
+		$query .= "ORDER BY category_name ASC";
+		$category1_set = mysqli_query($connection, $query);
+		confirm_query($category1_set);
+		return $category1_set;
+	}
+	
+	function find_questions_by_category($category_id) {
+		global $connection;
+		
+		$safe_category_id = mysqli_real_escape_string($connection, $category_id);
+		
+		$query  = "SELECT * ";
+		$query .= "FROM questions ";
+		$query .= "WHERE category_id = {$safe_category_id} ";
+		$query .= "ORDER BY id ASC";
+		$question_set = mysqli_query($connection, $query);
+		confirm_query($question_set);
+		return $question_set;
+	}
+	
+	
+	function find_sub_category($category_id) {
+		global $connection;
+		
+		$safe_category_id = mysqli_real_escape_string($connection, $category_id);
+		
+		$query  = "SELECT * ";
+		$query .= "FROM categories ";
+		$query .= "WHERE parent_category_id = {$safe_category_id} ";
+		$query .= "ORDER BY category_name ASC";
+		$category_set = mysqli_query($connection, $query);
+		confirm_query($category_set);
+		return $category_set;
+	}
+	
+	function find_parent_category($category_id) {
+		global $connection;
+		
+		$safe_category_id = mysqli_real_escape_string($connection, $category_id);
+		
+		$query  = "SELECT * ";
+		$query .= "FROM categories ";
+		$query .= "WHERE id = (SELECT parent_category_id ";
+		$query .= "FROM categories ";
+		$query .= "WHERE id = {$safe_category_id}) ";
+		$category_set = mysqli_query($connection, $query);
+		confirm_query($category_set);
+		return $category_set;	
+	}
+
 	function find_subject_by_id($subject_id, $public=true) {
 		global $connection;
 		
@@ -125,6 +181,42 @@
 		confirm_query($page_set);
 		if($page = mysqli_fetch_assoc($page_set)) {
 			return $page;
+		} else {
+			return null;
+		}
+	}
+	
+	function find_question_by_id($question_id) {
+		global $connection;
+		
+		$safe_question_id = mysqli_real_escape_string($connection, $question_id);
+		
+		$query  = "SELECT * ";
+		$query .= "FROM questions ";
+		$query .= "WHERE id = {$safe_question_id} ";
+		$query .= "LIMIT 1";
+		$question_set = mysqli_query($connection, $query);
+		confirm_query($question_set);
+		if($question = mysqli_fetch_assoc($question_set)) {
+			return $question;
+		} else {
+			return null;
+		}
+	}
+	
+	function find_category_by_id($category_id) {
+		global $connection;
+		
+		$safe_category_id = mysqli_real_escape_string($connection, $category_id);
+		
+		$query  = "SELECT * ";
+		$query .= "FROM categories ";
+		$query .= "WHERE id = {$safe_category_id} ";
+		$query .= "LIMIT 1";
+		$category_set = mysqli_query($connection, $query);
+		confirm_query($category_set);
+		if($category = mysqli_fetch_assoc($category_set)) {
+			return $category;
 		} else {
 			return null;
 		}
@@ -230,6 +322,23 @@
 			$current_page = null;
 		}
 	}
+		
+	function find_selected_question() {  //find selected category or question
+		global $current_category;
+		global $current_question;
+		
+		if (isset($_GET["category"])) {
+			$current_category = find_category_by_id($_GET["category"]);
+            $current_question = null;
+		
+		} elseif (isset($_GET["question"])) {
+			$current_category = null;
+			$current_question = find_question_by_id($_GET["question"]);
+		} else {
+			$current_category = null;
+			$current_question = null;
+		}
+	}
 
 	// navigation takes 2 arguments
 	// - the current subject array or null
@@ -309,6 +418,69 @@
 			$output .= "</li>"; // end of the subject li
 		}
 		mysqli_free_result($subject_set);
+		$output .= "</ul>";
+		return $output;
+	}
+	
+	function question_navigation($category_array, $question_array) {
+		//level1
+		$output = "<ul class=\"level1categories\">";
+		$level1category_set = find_all_level1_category();
+		while($level1category = mysqli_fetch_assoc($level1category_set)) {
+			$output .= "<li";
+			if ($category_array && $level1category["id"] == $category_array["id"]) {
+				$output .= " class=\"categoryselected\"";
+			}
+			$output .= ">";
+			$output .= "<a href=\"manage_questions.php?category=";
+			$output .= urlencode($level1category["id"]);
+			$output .= "\">";
+			$output .= htmlentities($level1category["category_name"]);
+			$output .= "</a>";
+			
+		//level2
+			$level2category_set = find_sub_category($level1category["id"]);
+			$output .= "<ul class=\"level2categories\">";
+			while($level2category = mysqli_fetch_assoc($level2category_set)) {
+				$output .= "<li";
+				if ($category_array && $level2category["id"] == $category_array["id"]) {
+					$output .= " class=\"categoryselected\"";
+				}
+				$output .= ">";
+				$output .= "<a href=\"manage_questions.php?category=";
+				$output .= urlencode($level2category["id"]);
+				$output .= "\">";
+				$output .= htmlentities($level2category["category_name"]);
+				$output .= "</a></li>";
+		
+			
+				//level3
+				$level3category_set = find_sub_category($level2category["id"]);
+				$output .= "<ul class=\"level3categories\">";
+				while($level3category = mysqli_fetch_assoc($level3category_set)) {
+					$output .= "<li";
+					if ($category_array && $level3category["id"] == $category_array["id"]) {
+						$output .= " class=\"categoryselected\"";
+					}
+					elseif ($question_array && $level3category["id"] == $question_array["category_id"]) {
+						$output .= " class=\"categoryselected\"";
+					}
+					$output .= ">";
+					$output .= "<a href=\"manage_questions.php?category=";
+					$output .= urlencode($level3category["id"]);
+					$output .= "\">";
+					$output .= htmlentities($level3category["category_name"]);
+					$output .= "</a></li>";
+				}
+			
+				mysqli_free_result($level3category_set);
+				$output .= "</ul></li>";
+			}
+			mysqli_free_result($level2category_set);
+			$output .= "</ul></li>";
+		}
+
+	 mysqli_free_result($level1category_set);
 		$output .= "</ul>";
 		return $output;
 	}

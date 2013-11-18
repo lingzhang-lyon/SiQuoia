@@ -5,7 +5,7 @@
 
 <?php $layout_context = "admin"; ?>
 <?php include("../includes/layouts/header.php"); ?>
-<?php find_selected_page(); ?>
+<?php find_selected_question(); ?>
 
 <div id="main">
   <div id="navigation">
@@ -21,13 +21,13 @@
 		<?php echo message(); ?>
 
 		<?php //root category
-		if ($current_category["category_level"]=1) { ?>
+		if ($current_category && $current_category["category_level"]==1) { ?>
 		<h2>Manage Category</h2>
 		Category name: <?php echo htmlentities($current_category["category_name"]); ?><br />
 		Category level: <?php echo $current_category["category_level"]; ?><br />
 		
 		<br />
-		<a href="edit_category.php?subject=<?php echo urlencode($current_category["id"]); ?>">Edit Category</a>
+		<a href="edit_category.php?category=<?php echo urlencode($current_category["id"]); ?>">Edit Category</a>
 
 		<div style="margin-top: 2em; border-top: 1px solid #000000;">
 		<h3>Sub categories in this category:</h3>
@@ -49,12 +49,13 @@
 		</div>
 
 		<?php } //second level category
-		if ($current_category["category_level"]=2) { ?>
+		elseif ($current_category && $current_category["category_level"]==2) { ?>
 		<h2>Manage Category</h2>
 		Category name: <?php echo htmlentities($current_category["category_name"]); ?><br />
 		Category level: <?php echo $current_category["category_level"]; ?><br />
-		Parent category: <?php $parent_category=find_parent_category($current_category["id"]);
-			echo $parent_category["category_name"] ?><br />
+		Parent category: <?php $parent_category_set=find_parent_category($current_category["id"]);
+								$parent_category=mysqli_fetch_assoc($parent_category_set);
+								echo $parent_category["category_name"] ?><br />
 		<br />
 		<a href="edit_category.php?subject=<?php echo urlencode($current_category["id"]); ?>">Edit Category</a>
 		
@@ -78,12 +79,13 @@
 		</div>
 
 		<?php } // third level category
-		elseif ($current_category["category_level"]=3) { ?>
+		elseif ($current_category && $current_category["category_level"]==3) { ?>
 		<h2>Manage Category</h2>
 		Category name: <?php echo htmlentities($current_category["category_name"]); ?><br />
 		Category level: <?php echo $current_category["category_level"]; ?><br />
-		Parent category: <?php $parent_category=find_parent_category($current_category["id"]);
-			echo $parent_category["category_name"] ?><br />
+		Parent category:  <?php $parent_category_set=find_parent_category($current_category["id"]);
+								$parent_category=mysqli_fetch_assoc($parent_category_set);
+								echo $parent_category["category_name"] ?><br />
 		<br />
 		<a href="edit_category.php?category=<?php echo urlencode($current_category["id"]); ?>">Edit Category</a>
 
@@ -100,7 +102,7 @@
 			<tr>
 			<td><?php echo htmlentities($question["id"]); ?></td>
 			<td><?php echo htmlentities($question["status"]); ?></td>
-			<td><a href="manage_question.php?question=<?php echo urlencode($question["id"]); ?>"> Review </a></td>
+			<td><a href="manage_questions.php?question=<?php echo urlencode($question["id"]); ?>"> Review </a></td>
 			</tr>
 			<?php } ?>
 			</table>
@@ -122,16 +124,20 @@
 		Correct Option: <?php echo $current_question["correct_option"] ?><br />
 		Status: <?php echo $current_question["status"] ?><br />
 		Category: <?php 
-			$parent_category=find_parent_category($current_category["id"]);
-			$root_category=find_parent_category($parent_category["id"]);
-			echo $root_question["category_name"];
+			$category=find_category_by_id($current_question["category_id"]);
+			$parent_category_set=find_parent_category($category["id"]);
+			$parent_category = mysqli_fetch_assoc ($parent_category_set);
+			$root_category_set=find_parent_category($parent_category["id"]);
+			$root_category = mysqli_fetch_assoc ($root_category_set);
+			echo $root_category["category_name"];
 			echo "-->";
-			echo $parent_question["category_name"];
+			echo $parent_category["category_name"];
 			echo "-->";
-			echo $current_question["category_name"] ?><br />
+			echo $category["category_name"] 
+			?><br />
 		Level: <?php echo $current_question["level"] ?><br />
 	  <br />
-	  <a href="edit_question.php?id=<?php echo urlencode($current_page['id']); ?>">Edit question</a>
+	  <a href="edit_question.php?id=<?php echo urlencode($current_question['id']); ?>">Edit question</a>
 			
 		<?php } // nothing selected
 		else { ?>
