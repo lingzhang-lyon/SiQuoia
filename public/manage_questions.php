@@ -137,7 +137,7 @@
 			?><br />
 		Level: <?php echo $current_question["level"] ?><br />
 	  <br />
-	  <a href="edit_question.php?id=<?php echo urlencode($current_question['id']); ?>">Edit question</a>
+	  <a href="edit_question.php?questionId=<?php echo urlencode($current_question['id']); ?>">Edit question</a>
 			
 		<?php } // nothing selected
 		else { ?>

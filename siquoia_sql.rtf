@@ -4,13 +4,12 @@
 }
 \vieww12240\viewh14820\viewkind1
 \deftab720
-\pard\pardeftab720\ri0\sl276\slmult1
+\pard\pardeftab720\ri0\sl276\slmult1\ql\qnatural
 
 \f0\b\fs22 \cf2 1. Create Database:
 \b0 \cf0 \
 
 \b \cf2 \
-\pard\pardeftab720\ri0\sl276\slmult1
 
 \b0 \cf0 $ mysql --version\
 $ mysql -u root -p\
@@ -30,17 +29,15 @@ Enter password:\
 mysql> SHOW DATABASES;\
 mysql> USE siquoia\
 \
-\pard\pardeftab720\ri0\sl276\slmult1
 
 \b \cf2 2. Create Tables:\
 \
-\pard\pardeftab720\ri0\sl276\slmult1
 
 \b0 \cf0 --\
-\pard\pardeftab720\ri0\sl276\slmult1
+\pard\pardeftab720\ri0\sl276\slmult1\ql\qnatural
 
 \b \cf0 -- Table structure for table `\cf3 admins\cf0 `\
-\pard\pardeftab720\ri0\sl276\slmult1
+\pard\pardeftab720\ri0\sl276\slmult1\ql\qnatural
 
 \b0 \cf0 --\
 \
@@ -53,27 +50,27 @@ CREATE TABLE `admins` (\
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;\
 \
 --\
-\pard\pardeftab720\ri0\sl276\slmult1
+\pard\pardeftab720\ri0\sl276\slmult1\ql\qnatural
 
 \b \cf0 -- Dumping data for table `admins`\
-\pard\pardeftab720\ri0\sl276\slmult1
+\pard\pardeftab720\ri0\sl276\slmult1\ql\qnatural
 
 \b0 \cf0 --\
 \
 INSERT INTO `admins` VALUES (1,'kskoglund','$2y$10$NmZiNzcxMzhiY2E0NTg2YO9X4eeRSo03H6r0A5bqHkZnF1hI8sLX.'),(3,'johndoe','$2y$10$NTdmODYxZWQ0OGMwYmMxZ.Q3I4i0FtO/X9DWv1tpsF5hiS9LBXqmu');\
 \
 \
-\pard\pardeftab720\ri0\sl276\slmult1
+\pard\pardeftab720\ri0\sl276\slmult1\ql\qnatural
 \cf4 \
-\pard\pardeftab720\ri0\sl276\slmult1
+\pard\pardeftab720\ri0\sl276\slmult1\ql\qnatural
 \cf0 \
-\pard\pardeftab720\ri0\sl276\slmult1
+\pard\pardeftab720\ri0\sl276\slmult1\ql\qnatural
 \cf3 --\
 -- Table structure for table `pages`\
 --\
-\pard\pardeftab720\ri0\sl276\slmult1
+\pard\pardeftab720\ri0\sl276\slmult1\ql\qnatural
 \cf0 \
-\pard\pardeftab720\ri0\sl276\slmult1
+\pard\pardeftab720\ri0\sl276\slmult1\ql\qnatural
 \cf3 DROP TABLE IF EXISTS `pages`;\
 CREATE TABLE `pages` (\
   `id` int(11) NOT NULL AUTO_INCREMENT,\
@@ -110,13 +107,13 @@ CREATE TABLE `subjects` (\
 --\
 \
 INSERT INTO `subjects` VALUES (1,'About Widget Corp',1,1),(2,'Products',2,1),(3,'Services',3,1),(6,'Today\\'s Widget Trivia',4,0);\
-\pard\pardeftab720\ri0\sl276\slmult1
+\pard\pardeftab720\ri0\sl276\slmult1\ql\qnatural
 \cf0 \
 --\
-\pard\pardeftab720\ri0\sl276\slmult1
+\pard\pardeftab720\ri0\sl276\slmult1\ql\qnatural
 
 \b \cf0 -- Table structure for table \cf3 players\cf0 \
-\pard\pardeftab720\ri0\sl276\slmult1
+\pard\pardeftab720\ri0\sl276\slmult1\ql\qnatural
 
 \b0 \cf0 --\
 \
@@ -133,14 +130,14 @@ CREATE TABLE players (\
 ); \
 \
 Show columns from players;\
-\pard\pardeftab720\ri0\sl276\slmult1
+\pard\pardeftab720\ri0\sl276\slmult1\ql\qnatural
 \cf4 \
-\pard\pardeftab720\ri0\sl276\slmult1
+\pard\pardeftab720\ri0\sl276\slmult1\ql\qnatural
 \cf0 --\
-\pard\pardeftab720\ri0\sl276\slmult1
+\pard\pardeftab720\ri0\sl276\slmult1\ql\qnatural
 
 \b \cf0 -- Dumping data for table players\
-\pard\pardeftab720\ri0\sl276\slmult1
+\pard\pardeftab720\ri0\sl276\slmult1\ql\qnatural
 
 \b0 \cf0 --\
 \
@@ -155,7 +152,7 @@ VALUES (1,'Bingyu','$2y$10$MzA0ODVlNTg0YTU1N2FhYeDzei3UNykWTTMN0E4G/siiXgkyp4r6y
 (6,'Steven','$2y$10$NjQwY2M0Mzg1MzJjMDZmYe6Uqk8goOGvgDp8kK1i5r/ClXiUacUBm','standard');\
 \
 Select * From players;\
-\pard\pardeftab720\ri0\sl276\slmult1
+\pard\pardeftab720\ri0\sl276\slmult1\ql\qnatural
 \cf4 \
 \
 \
@@ -170,7 +167,9 @@ Select * From players;\
 \pard\pardeftab720\ri0\sl276\slmult1\ql\qnatural
 
 \b0 \cf0 --\
+\pard\pardeftab720\ri0\sl276\slmult1\ql\qnatural
 \cf4 \
+\pard\pardeftab720\ri0\sl276\slmult1\ql\qnatural
 \cf0 DROP TABLE IF EXISTS categories;\
 CREATE TABLE categories (\cf4 \
 \cf0 id int Not NULL AUTO_INCREMENT,\
@@ -193,12 +192,11 @@ INSERT INTO  categories (id, category_name,category_level,parent_category_id)\
 VALUES (1, 'Science', 1, NULL),(2, 'Math', 2, 1),(3, 'Primary Math', 3, 2);\
 \
 \
-\pard\pardeftab720\ri0\sl276\slmult1
-\cf0 --\
-\pard\pardeftab720\ri0\sl276\slmult1
+--\
+\pard\pardeftab720\ri0\sl276\slmult1\ql\qnatural
 
 \b \cf0 -- Table structure for table \cf3 questions\cf0 \
-\pard\pardeftab720\ri0\sl276\slmult1
+\pard\pardeftab720\ri0\sl276\slmult1\ql\qnatural
 
 \b0 \cf0 --\
 \
@@ -217,28 +215,28 @@ category_id int Not Null,\
 level int Default Null,\
 PRIMARY KEY (id),\
 FOREIGN KEY (player_id) REFERENCES players(id),\
+FOREIGN KEY (category_id) REFERENCES categories(id)\
+); \
 \pard\pardeftab720\ri0\sl276\slmult1\ql\qnatural
-\cf0 FOREIGN KEY (category_id) REFERENCES categories(id)\
-\pard\pardeftab720\ri0\sl276\slmult1
-\cf0 ); \
-\pard\pardeftab720\ri0\sl276\slmult1
 \cf4 \
 -- remember that the last item in sql should not end with \'93,\'94\
 \
 \
-\pard\pardeftab720\ri0\sl276\slmult1
+\pard\pardeftab720\ri0\sl276\slmult1\ql\qnatural
 \cf0 --\
-\pard\pardeftab720\ri0\sl276\slmult1
+\pard\pardeftab720\ri0\sl276\slmult1\ql\qnatural
 
 \b \cf0 -- Dumping data for table \cf3 questions\cf0 \
-\pard\pardeftab720\ri0\sl276\slmult1
+\pard\pardeftab720\ri0\sl276\slmult1\ql\qnatural
 
 \b0 \cf0 --\
-\pard\pardeftab720\ri0\sl276\slmult1
+\pard\pardeftab720\ri0\sl276\slmult1\ql\qnatural
 \cf4 \
-\pard\pardeftab720\ri0\sl276\slmult1
+\pard\pardeftab720\ri0\sl276\slmult1\ql\qnatural
 \cf0 INSERT INTO  questions (id,question_content,option1, option2, option3, option4,correct_option,status,category_id, level) \
 VALUES (1,'what is 1+1?','is 1','is 2','is 3','is 4','2','approved', 3, 0);\
-\pard\pardeftab720\ri0\sl276\slmult1
+\
+update questions set player_id =4 where id=1;\
+\pard\pardeftab720\ri0\sl276\slmult1\ql\qnatural
 \cf4 \
 }
