@@ -1,4 +1,4 @@
-<?php
+<?php  //functions for siquoia
 
 	function redirect_to($new_location) {
 	  header("Location: " . $new_location);
@@ -438,7 +438,7 @@
 			$output .= htmlentities($level1category["category_name"]);
 			$output .= "</a>";
 			
-		//level2
+		    //level2
 			$level2category_set = find_sub_category($level1category["id"]);
 			$output .= "<ul class=\"level2categories\">";
 			while($level2category = mysqli_fetch_assoc($level2category_set)) {
