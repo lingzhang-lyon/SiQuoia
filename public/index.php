@@ -4,9 +4,10 @@
 
 <?php $layout_context = "public"; ?>
 <?php include("../includes/layouts/header.php"); ?>
+
 <?php find_selected_page(true); ?>
 
-<div id="main">
+<div id="main" >
   <div id="navigation">
 		<br> </br>
 		<form action="login.php" method= "LINK">
@@ -31,7 +32,7 @@
   </div>
 
 
-  <div id="page">
+ <div id="page" class="wrapper">
 		<?php if ($current_page) { ?>
 			
 			<h2><?php echo htmlentities($current_page["menu_name"]); ?></h2>
@@ -40,6 +41,7 @@
 		<?php } else { ?>
 			
 			<p>Welcome!</p>
+		    <img src="images/Intelligence.jpg" width="480" height="400" >
 			
 		<?php }?>
   </div>

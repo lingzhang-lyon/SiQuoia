@@ -1,4 +1,4 @@
-/* Site Colors:
+/* Site Colors:  Siquoia
   #1A446C - blue grey
   #689DC1 - light blue
   #D4E6F4 - very light blue
@@ -51,14 +51,6 @@ ul.subjects {
 ul.pages { padding-left: 2em; list-style: square; font-weight: normal; }
 .selected { font-weight: bold; }
 
-#navigation a { color: #D4E6F4; text-decoration: none; }
-#navigation a:hover { color: #FFFFFF; }
-ul.level1categories { margin: 1em 0; padding-left: 0; list-style: none;}
-ul.level2categories { padding-left: 2em; list-style: square; font-weight: normal; }
-ul.level3categories { padding-left: 3em; list-style: square; font-weight: normal; }
-.categoryselected { font-weight: bold; }
-
-
 /* Page Content */
 #page { 
 	float: left; height: 100%;
@@ -83,3 +75,14 @@ div.message {
 	margin: 1em 0; padding: 1em;
 }
 .error ul { padding-left: 2em; }
+
+.wrapper{
+	min-height: 100%;
+	height: auto !important;
+	height: 100%;
+	margin: 0 auto -2em;
+}
+
+.footer, .push{
+	height: 2em;
+}

@@ -100,6 +100,18 @@
 		return $category1_set;
 	}
 	
+	function find_all_level3_category() {
+		global $connection;
+		
+		$query  = "SELECT * ";
+		$query .= "FROM categories ";
+		$query .= "WHERE category_level = 3 ";
+		$query .= "ORDER BY category_name ASC";
+		$category3_set = mysqli_query($connection, $query);
+		confirm_query($category3_set);
+		return $category3_set;
+	}
+	
 	function find_questions_by_category($category_id) {
 		global $connection;
 		
