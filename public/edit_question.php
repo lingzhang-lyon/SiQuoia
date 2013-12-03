@@ -62,7 +62,7 @@
 <?php include("../includes/layouts/header.php"); ?>
 
 <div id="main">
-<div class="wrapper">
+
 <div id="navigation">
 <div class="wrapper">
 <br />

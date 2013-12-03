@@ -23,7 +23,7 @@ a:hover { color: #1A446C; }
 	margin: 0; padding: 0; text-align: left; 
   background: #1A446C; color: #D4E6F4;
 }
-#header h1 { padding: 1em; margin: 0; }
+#header h1 { padding: 0; margin: 0; }
 #main { 
 	height: 600px; width: 100%; 
 	margin: 0; padding: 0; 
