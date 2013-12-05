@@ -234,6 +234,24 @@
 		}
 	}
 	
+	function find_quiz_by_id($quiz_id) {
+		global $connection;
+		
+		$safe_quiz_id = mysqli_real_escape_string($connection, $quiz_id);
+		
+		$query  = "SELECT * ";
+		$query .= "FROM quiz ";
+		$query .= "WHERE id = {$safe_quiz_id} ";
+		$query .= "LIMIT 1";
+		$quiz_set = mysqli_query($connection, $query);
+		confirm_query($quiz_set);
+		if($quiz = mysqli_fetch_assoc($quiz_set)) {
+			return $quiz;
+		} else {
+			return null;
+		}
+	}
+	
 	function find_admin_by_id($admin_id) {
 		global $connection;
 		
@@ -352,6 +370,43 @@
 		}
 	}
 
+	function find_questions_by_quiz_id($quiz_id){
+		global $connection;
+		
+		$safe_quiz_id = mysqli_real_escape_string($connection, $quiz_id);
+		
+		$query  = "SELECT * ";
+		$query .= "FROM questions ";
+		$query .= "WHERE id in ( ";
+		$query .= "select question_id from quiz_question ";
+		$query .= "WHERE quiz_id = {$safe_quiz_id} ";
+		$query .= ")";
+		$quiz_question_set = mysqli_query($connection, $query);
+		confirm_query($quiz_question_set);
+		
+		return $quiz_question_set;
+		
+	}
+	
+	function find_player_answered_questions($quiz_id){
+		global $connection;
+		
+		$safe_quiz_id = mysqli_real_escape_string($connection, $quiz_id);
+		
+		$query  = "SELECT  Q.id, Q.question_content, Q.option1, Q.option2,Q.option3,Q.option4,
+		Q.correct_option, QP.quiz_id, QP.player_answer ";
+		$query .= "FROM questions Q, question_playeranswer QP ";
+		$query .= "WHERE QP.quiz_id= {$safe_quiz_id} ";
+		$query .= "AND Q.id=QP.question_id; ";
+		$quiz_question_set = mysqli_query($connection, $query);
+		confirm_query($quiz_question_set);
+		
+		return $quiz_question_set;
+	}
+
+	
+//functions for views ---------------------------------------------------------------------------------:	
+	
 	// navigation takes 2 arguments
 	// - the current subject array or null
 	// - the current page array or null
@@ -497,6 +552,92 @@
 		return $output;
 	}
 
+	function show_level3category_for_selection(){ 
+		echo "<select name=\"level3categoryId\" >";
+		$level3category_set = find_all_level3_category();
+		while($level3category = mysqli_fetch_assoc($level3category_set)) { 
+			echo "<option value ={$level3category['id']}> {$level3category['category_name']} </option> ";
+		}
+		echo "</select>";
+	}
+	
+	function quiz_question_for_selection($quiz_question){ //$quiz_question is a tuple array of question, include all the info about this question
+		
+		
+		$output =htmlentities($quiz_question['question_content']);
+		$output .="<br>";
+		$output .="<input type='radio' name='answer_for_question_";
+		$output .=htmlentities($quiz_question['id']);
+		$output .="' value=1 />";
+		$output .=htmlentities($quiz_question['option1']);
+		$output .="<br>";
+		$output .="<input type='radio' name='answer_for_question_";
+		$output .=htmlentities($quiz_question['id']);
+		$output .="' value=2 />";
+		$output .=htmlentities($quiz_question['option2']);
+		$output .="<br>";
+		$output .="<input type='radio' name='answer_for_question_";
+		$output .=htmlentities($quiz_question['id']);
+		$output .="' value=3 />";
+		$output .=htmlentities($quiz_question['option3']);
+		$output .="<br>";
+		$output .="<input type='radio' name='answer_for_question_";
+		$output .=htmlentities($quiz_question['id']);
+		$output .="' value=4 />";
+		$output .=htmlentities($quiz_question['option4']);
+		$output .="<br>";
+		return $output;
+	}
+	
+	
+	function quiz_question_for_result($quiz_question,$count=0){ 
+		//$quiz_question is a tuple array of question, 
+		//include all the info about this question and player's answer about this question in the quiz
+		//$count is the sequence of question in the result list
+	
+	 	$output  = "<h3>Question".$count."&nbsp";
+		$output .="</h3>";
+		//$output .="</h3>";
+		$output .=htmlentities($quiz_question['question_content']);
+		$output .="<ol>";
+		$output .="<li> ";
+		$output .=htmlentities($quiz_question['option1']);
+		$output .="</li> ";
+		$output .="<li> ";
+		$output .=htmlentities($quiz_question['option2']);
+		$output .="</li> ";
+		$output .="<li> ";
+		$output .=htmlentities($quiz_question['option3']);
+		$output .="</li> ";
+		$output .="<li> ";
+		$output .=htmlentities($quiz_question['option4']);
+		$output .="</li> ";
+		$output .="</ol>";
+		$output .="The correct answer is ";
+		$output .=htmlentities($quiz_question['correct_option']);
+		$output .="; &nbsp; ";
+		$output .="Your answer is ";
+		$output .=htmlentities($quiz_question['player_answer']);
+		$output .="<br></br> ";
+
+		return $output;
+	}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	
+//end of functions of views-------------------------------------------------------------------------------
+	
+	
+	
 	function password_encrypt($password) {
   	$hash_format = "$2y$10$";   // Tells PHP to use Blowfish with a "cost" of 10
 	  $salt_length = 22; 					// Blowfish salts should be 22-characters or more

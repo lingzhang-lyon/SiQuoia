@@ -18,10 +18,11 @@
 		$option4 = mysql_prep($_POST["option4"]);
 		$correct_option = $_POST["correct_option"];
 		$status= mysql_prep($_POST["status"]);
+		$level3categoryId=mysql_prep($_POST["level3categoryId"]);
 		
 		
 		// validations
-		$required_fields = array("content", "option1", "option2","option3","option4","correct_option","status");
+		$required_fields = array("content", "option1", "option2","option3","option4","correct_option","status","level3categoryId");
 		validate_presences($required_fields);
 		
 		
@@ -36,7 +37,8 @@
 			$query .= "option3 = '{$option3}', ";
 			$query .= "option4 = '{$option4}', ";
 			$query .= "correct_option = {$correct_option}, ";
-			$query .= "status = '{$status}' ";
+			$query .= "status = '{$status}', ";
+			$query .= "category_id = {$level3categoryId} ";
 			$query .= "WHERE id = {$question_id} ";
 			$query .= "LIMIT 1";
 			$result = mysqli_query($connection, $query);
@@ -101,14 +103,14 @@
 
 <?php	
 	echo "<select name=\"level3categoryId\" >";
-	 $level3category_set = find_all_level3_category();
-	 while($level3category = mysqli_fetch_assoc($level3category_set)) { 
-		 echo "<option value ={$level3category['id']}";
-		 if ($level3category['id'] == $current_question["category_id"]) {
-			 echo " selected";
-		 }
-		 echo "> {$level3category['category_name']} </option> ";
-		 }
+	$level3category_set = find_all_level3_category();
+	while($level3category = mysqli_fetch_assoc($level3category_set)) { 
+		echo "<option value ={$level3category['id']}";
+		if ($level3category['id'] == $current_question["category_id"]) {
+			echo " selected";
+		}
+		echo "> {$level3category['category_name']} </option> ";
+	}
     echo "</select>";
 ?>
 
@@ -133,7 +135,7 @@
 <textarea name="option3" rows="2" cols="60"><?php echo htmlentities($current_question["option3"]); ?></textarea>
 </p>
 
-<p>Option3:<br />
+<p>Option4:<br />
 <textarea name="option4" rows="2" cols="60"><?php echo htmlentities($current_question["option4"]); ?></textarea>
 </p>
 
