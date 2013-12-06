@@ -36,7 +36,7 @@ if (isset($_POST['submit'])) {
 		}
 	}
 	
-	redirect_to ("player_quiz_result.php");
+	redirect_to ("player_quiz_result.php?quizId={$quiz_id}");
 		
 } else {
 	// This is probably a GET request
@@ -60,16 +60,17 @@ if (isset($_POST['submit'])) {
 		
 		<h2>Taking your quiz now <?php echo htmlentities($player["username"]); ?></h2>
 		<form action="player_take_quiz.php" method="post">
+        
        <?php
 		   $quiz_question_set = find_questions_by_quiz_id($_SESSION["quiz_id"]);
 		    $count=1;
 			while ($quiz_question=mysqli_fetch_assoc($quiz_question_set)){
-				echo "Question".$count." :&nbsp";
+				echo "</br> Question".$count." :&nbsp";
 				echo quiz_question_for_selection($quiz_question);
 				$count++;
 			}
 		?>
-
+         
 		
         <input type="submit" name="submit" value="Submit" /> 
 

@@ -63,7 +63,7 @@
 <?php $layout_context = "admin"; ?>
 <?php include("../includes/layouts/header.php"); ?>
 
-<div id="main">
+<div id="main" >
 
 <div id="navigation">
 <div class="wrapper">
@@ -76,7 +76,7 @@
 </div>
 
 
-<div id="page">
+<div id="page"class="wrapper">
 
 
 <?php echo message(); ?>
@@ -86,8 +86,14 @@
 <form action="edit_question.php?questionId=<?php echo urlencode($current_question["id"]); ?>" method="post">
 
 <p>Submitted by player:
-<?php $player=find_player_by_id($current_question["player_id"]);
-	echo htmlentities($player["username"]); //show question submittee
+<?php 
+	if ($current_question["player_id"]==null){
+		echo "admin";
+	}
+	else{
+	$player=find_player_by_id($current_question["player_id"]);
+		echo htmlentities($player["username"]); 
+	}//show question submittee
 	?><br />
 </p>
 

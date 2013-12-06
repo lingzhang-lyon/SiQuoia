@@ -75,13 +75,14 @@ if (isset($_POST['submit'])) {
 		<?php echo form_errors($errors); ?>
 		<?php if($player["credits"]<10) {
 			  echo "You don't have enough credits, do you want to make a payment? "; 
-			  echo "<a href=\"make_payment.php\">Make Payment</a>";
+			  echo "<a href=\"player_make_payment.php\">Make Payment</a>";
 		}
 		?>
 	   
 		
 		<h2>You can choose a quiz here <?php echo htmlentities($player["username"]); ?></h2>
 		<form action="player_choose_quiz.php" method="post">
+<p> Each quiz cost 10 credits, please choose the category and mode for your quiz.</p>
 		<p>Category:
 		<?php 
 			echo "<select name=\"level3categoryId\" >";

@@ -9,7 +9,7 @@
 
 <?php
 	$player_id = $_SESSION["player_id"];
-	$quiz_id = $_SESSION["quiz_id"];
+	$quiz_id = $_GET["quizId"];
 
 	$player_answered_question_set=find_player_answered_questions($quiz_id);
 	$count=0; 

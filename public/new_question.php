@@ -2,15 +2,15 @@
 <?php require_once("../includes/db_connection.php"); ?>
 <?php require_once("../includes/functions.php"); ?>
 <?php require_once("../includes/validation_functions.php"); ?>
-<?php confirm_player_logged_in(); ?>
+<?php confirm_logged_in(); ?>
 <?php
 	
-	$player=find_player_by_id ($_SESSION["player_id"]);
+	$current_category=find_category_by_id ($_GET["categoryId"]);
 	
 	if (isset($_POST['submit'])) {
 		// Process the form
 		
-		$player_id=$_SESSION["player_id"];
+		
 		$content = mysql_prep($_POST["content"]);
 		$option1 = mysql_prep($_POST["option1"]);
 		$option2 = mysql_prep($_POST["option2"]);
@@ -30,9 +30,9 @@
 			// Perform Update
 			
 			$query  = "INSERT into questions ( ";
-			$query .= "player_id, question_content, option1,option2,option3,option4, correct_option,category_id ";
+			$query .= "question_content, option1,option2,option3,option4, correct_option,category_id,status ";
 			$query .= " )VALUES (";
-			$query .= " {$player_id},'{$content}','{$option1}', '{$option2}', '{$option3}','{$option4}', {$correct_option},{$level3categoryId}";
+			$query .= " '{$content}','{$option1}', '{$option2}', '{$option3}','{$option4}', {$correct_option},{$level3categoryId},'approved'";
 			$query .= ")";
 			$insert_result = mysqli_query($connection, $query);
 			
@@ -53,7 +53,7 @@
 	
 	?>
 
-<?php $layout_context = "player"; ?>
+<?php $layout_context = "admin"; ?>
 <?php include("../includes/layouts/header.php"); ?>
 
 <div id="main">
@@ -61,7 +61,7 @@
 <div id="navigation">
 <div class="wrapper">
 <br />
-<a href="player.php">&laquo; Back</a><br />
+<a href="manage_questions.php">&laquo; Back</a><br />
 
 <br />
 
@@ -75,8 +75,8 @@
 <?php echo message(); ?>
 <?php echo form_errors($errors); ?>
 
-<h2>Submit A New Question: <?php echo htmlentities($player["username"]); ?></h2>
-<form action="player_new_question.php" method="post">
+<h2>Submit A New Question: <?php echo htmlentities($_SESSION["username"]); ?></h2>
+<form action="new_question.php?categoryId=<?php echo urlencode($current_category["id"]); ?>" method="post">
 
 <p>Category:
 
@@ -92,7 +92,11 @@
 	echo "<select name=\"level3categoryId\" >";
 	$level3category_set = find_all_level3_category();
 	while($level3category = mysqli_fetch_assoc($level3category_set)) { 
-		echo "<option value ={$level3category['id']}> {$level3category['category_name']} </option>";
+		echo "<option value ={$level3category['id']}";
+		if ($level3category['id'] == $current_category["id"]) {
+			echo " selected";
+		}
+		echo "> {$level3category['category_name']} </option> ";
 	}
     echo "</select>";
 ?>

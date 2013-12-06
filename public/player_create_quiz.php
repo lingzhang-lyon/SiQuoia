@@ -10,12 +10,11 @@
 <?php	
 	
 	$query  = "select id, category_id from questions ";
-	$query .= "where category_id = {$quiz['category_id']}; ";
-	$question_set = mysqli_query($connection, $query);
-	confirm_query($question_set); //find all the questions belong to selected category
+	$query .= "where category_id = {$quiz['category_id']} ";
+	$query .= "order by rand() limit 5; ";          //now we just show 5 questions, later could change to 10 or 100
+	$random_selected_question_set = mysqli_query($connection, $query);
+	confirm_query($random_selected_question_set); //get random selected questions from the category
 	
-	$random_selected_question_set = $question_set;//get random selected questions from the category
-
 	while ($selected_question=mysqli_fetch_assoc($random_selected_question_set)){		
 		
 		$query  = "INSERT INTO quiz_question (";

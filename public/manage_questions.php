@@ -27,7 +27,7 @@
 		Category level: <?php echo $current_category["category_level"]; ?><br />
 		
 		<br />
-		<a href="edit_category.php?category=<?php echo urlencode($current_category["id"]); ?>">Edit Category</a>
+		<a href="edit_category.php?categoryId=<?php echo urlencode($current_category["id"]); ?>">Edit Category</a>
 
 		<div style="margin-top: 2em; border-top: 1px solid #000000;">
 		<h3>Sub categories in this category:</h3>
@@ -45,7 +45,7 @@
 			?>
 		</ul>
 		<br />
-		+ <a href="new_category.php?parent_category=<?php echo urlencode($current_category["id"]); ?>">Add a new sub category to category</a>
+		+ <a href="new_category.php?parent_categoryId=<?php echo urlencode($current_category["id"]); ?>">Add a new sub category to category</a>
 		</div>
 
 		<?php } //second level category
@@ -57,7 +57,7 @@
 								$parent_category=mysqli_fetch_assoc($parent_category_set);
 								echo $parent_category["category_name"] ?><br />
 		<br />
-		<a href="edit_category.php?subject=<?php echo urlencode($current_category["id"]); ?>">Edit Category</a>
+		<a href="edit_category.php?categoryId=<?php echo urlencode($current_category["id"]); ?>">Edit Category</a>
 		
 		<div style="margin-top: 2em; border-top: 1px solid #000000;">
 			<h3>Sub categories in this category:</h3>
@@ -75,7 +75,7 @@
 			?>
 			</ul>
 			<br />
-			+ <a href="new_category.php?parent_category=<?php echo urlencode($current_category["id"]); ?>">Add a new sub category to category</a>
+			+ <a href="new_category.php?parent_categoryId=<?php echo urlencode($current_category["id"]); ?>">Add a new sub category to category</a>
 		</div>
 
 		<?php } // third level category
@@ -87,7 +87,7 @@
 								$parent_category=mysqli_fetch_assoc($parent_category_set);
 								echo $parent_category["category_name"] ?><br />
 		<br />
-		<a href="edit_category.php?category=<?php echo urlencode($current_category["id"]); ?>">Edit Category</a>
+		<a href="edit_category.php?categoryId=<?php echo urlencode($current_category["id"]); ?>">Edit Category</a>
 
 		<div style="margin-top: 2em; border-top: 1px solid #000000;">
 		<h3>Sub categories in this category:</h3>
@@ -108,7 +108,7 @@
 			</table>
 			<br />
 
-		+ <a href="new_question.php?category=<?php echo urlencode($current_category["id"]); ?>">Add a new question to category</a>
+		+ <a href="new_question.php?categoryId=<?php echo urlencode($current_category["id"]); ?>">Add a new question to category</a>
 		</div>
 
 
