@@ -27,7 +27,7 @@ if (isset($_POST['submit'])) {
 		$query  = "INSERT INTO quiz (";
 		$query .= "  player_id, category_id, mode";
 		$query .= ") VALUES (";
-		$query .= "  '{$player_id}', '{$category_id}','{$mode}'";
+		$query .= "  {$player_id}, {$category_id},'{$mode}'";
 		$query .= ")";
 		$result = mysqli_query($connection, $query);
 
