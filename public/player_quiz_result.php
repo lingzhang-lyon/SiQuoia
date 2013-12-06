@@ -20,7 +20,10 @@
 		}
 		$count++;
 	}
+	if ($count!=0){
 	$correct_rate=(double)100*$correct_count/$count;
+	}
+	else $correct_rate=0;
 ?>
 
 <?php $layout_context = "player"; ?>

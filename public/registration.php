@@ -22,14 +22,16 @@ if (isset($_POST['submit'])) {
     $player_hashed_password = password_encrypt($_POST["password"]);
     
     $query  = "INSERT INTO players (";
-    $query .= "  username, hashed_password, membership";
+    $query .= "  username, hashed_password, membership, credits, points ";
     $query .= ") VALUES (";
-    $query .= "  '{$player_username}', '{$player_hashed_password}','trial'";
+    $query .= "  '{$player_username}', '{$player_hashed_password}','trial', 0, 0 ";
     $query .= ")";
     $result = mysqli_query($connection, $query);
 
     if ($result) {
       // Success
+	  $player=find_player_by_username($player_username);
+      $_SESSION["player_id"] = $player['id'];
 	  $_SESSION["player_username"] = $player_username;
 	  $_SESSION["player_hashed_password"] = $player_hashed_password;
       redirect_to("player.php");

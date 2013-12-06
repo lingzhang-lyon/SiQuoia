@@ -23,9 +23,9 @@ if (isset($_POST['submit'])) {
 	$player_membership = $_POST["membership"];
     
     $query  = "INSERT INTO players (";
-    $query .= "  username, hashed_password,membership";
+    $query .= "  username, hashed_password,membership,credits, points";
     $query .= ") VALUES (";
-    $query .= "  '{$player_username}', '{$player_hashed_password}','{$player_membership}'";
+    $query .= "  '{$player_username}', '{$player_hashed_password}','{$player_membership}',0,0";
     $query .= ")";
     $result = mysqli_query($connection, $query);
 

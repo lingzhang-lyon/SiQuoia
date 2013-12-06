@@ -9,7 +9,7 @@ $player=find_player_by_id ($_SESSION["player_id"]);
 	$query  = "select * from quiz ";
 	$query .= "WHERE player_id ={$_SESSION['player_id']}; ";
 	$player_taken_quiz_set = mysqli_query($connection, $query);
-	confirm_query($player_taken_quiz_set);	
+	//confirm_query($player_taken_quiz_set);	
 ?>
 
 
@@ -35,6 +35,8 @@ $player=find_player_by_id ($_SESSION["player_id"]);
 		</ul>
   </div>
   <div id="page" >
+<?php echo message(); ?>
+
     <h2>Player Dashbord</h2>
     <p>Welcome to SiQuoia, <?php echo htmlentities($player["username"]); ?>.</p>
 	<p>

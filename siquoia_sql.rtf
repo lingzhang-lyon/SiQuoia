@@ -134,9 +134,9 @@ CREATE TABLE players (\
  username varchar(50) Not NULL,  \
  hashed_password varchar(255) not NULL,  \
  membership MEDIUMTEXT NOT NULL, \
- points int Default NULL,\
- credits int Default NULL,\
- rank int Default NULL, \
+ points int Default 0,\
+ credits int Default 0,\
+ rank int Default 0, \
  PRIMARY KEY (id)\
 ); \
 \
@@ -401,7 +401,7 @@ INSERT INTO  questions (id,player_id, question_content,option1, option2, option3
 \f3\fs18 \cf0 code metrics and test metrics.
 \f0\fs22 \cf6 ',\
 '
-\f3\fs18 \cf0 \ul \ulc0 product metrics and process metrics.
+\f3\fs18 \cf0 \ul product metrics and process metrics.
 \f0\fs22 \cf6 \ulnone ',\
 '
 \f3\fs18 \cf0 none of these
@@ -416,7 +416,7 @@ INSERT INTO  questions (id,player_id, question_content,option1, option2, option3
 \f4  
 \f0\fs22 \cf6 ',\
 '
-\f3\fs18 \cf0 \ul \ulc0 the number of defects relative to the software size expressed in thousands of lines of code.\ulnone  
+\f3\fs18 \cf0 \ul the number of defects relative to the software size expressed in thousands of lines of code.\ulnone  
 \f0\fs22 \cf6 ',\
 '
 \f3\fs18 \cf0 the amount of time it takes to fix the defect.
@@ -430,7 +430,7 @@ INSERT INTO  questions (id,player_id, question_content,option1, option2, option3
 \f3\fs18 \cf0 The collection of quality metric information will help with the following:
 \f0\fs22 \cf6 ',\
 '
-\f3\fs18 \cf0 \ul \ulc0 all of these.
+\f3\fs18 \cf0 \ul all of these.
 \f0\fs22 \cf6 \ulnone ',\
 '
 \f4\fs18 \cf0 estimating project schedules.
@@ -457,10 +457,10 @@ INSERT INTO  questions (id,player_id, question_content,option1, option2, option3
 \f3\fs18 \cf0 only fix the critical defects.
 \f0\fs22 \cf6 ',\
 '
-\f3\fs18 \cf0 \ul \ulc0 hide as many defects as possible
+\f3\fs18 \cf0 \ul hide as many defects as possible
 \f2 .
 \f0\fs22 \cf6 \ulnone ',\
-'4','approved', 8, 0)\
+'4','approved', 8, 0),\
 \
 (11, 4, '
 \f3\fs18 \cf0 Which of these is not a quality metric:
@@ -476,7 +476,7 @@ INSERT INTO  questions (id,player_id, question_content,option1, option2, option3
 \f3\fs18 \cf0 defect density.
 \f0\fs22 \cf6 ',\
 '
-\f3\fs18 \cf0 \ul \ulc0 upper management satisfaction
+\f3\fs18 \cf0 \ul upper management satisfaction
 \f2 \ulnone .
 \f0\fs22 \cf6 ',\
 '4','approved', 8, 0);\cf4 \
