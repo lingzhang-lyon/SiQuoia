@@ -37,7 +37,7 @@ $player=find_player_by_id ($_SESSION["player_id"]);
   <div id="page" >
 <?php echo message(); ?>
 
-    <h2>Player Dashbord</h2>
+    <h2>Player Dashboard</h2>
     <p>Welcome to SiQuoia, <?php echo htmlentities($player["username"]); ?>.</p>
 	<p>
 	Your Credits Balance are: <?php echo htmlentities($player["credits"]); ?>.
