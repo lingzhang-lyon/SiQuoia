@@ -19,7 +19,10 @@
 
 <div id="main">
   <div id="navigation" class="wrapper">
-    &nbsp;
+	<br />
+	<a href="player.php">&laquo; Back to Dashboard</a><br />
+
+	<br />
   </div>
   <div id="page" class="wrapper">
 			

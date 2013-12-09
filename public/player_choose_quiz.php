@@ -74,7 +74,10 @@ else {
 
 <div id="main">
   <div id="navigation">
-    &nbsp;
+	<br />
+	<a href="player.php">&laquo; Back to Dashboard</a><br />
+
+	<br />
   </div>
   <div id="page">
 			

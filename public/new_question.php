@@ -137,7 +137,7 @@
 <input type="submit" name="submit" value="Submit the new question" />
 </form>
 
-<a href="player.php">Cancel</a>
+<a href="manage_questions.php">Cancel</a>
 </br> </br>
 
 </div>

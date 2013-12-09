@@ -12,7 +12,7 @@
 
 	
 	$query  = "select id, category_id from questions ";
-	$query .= "where category_id = {$quiz['category_id']} ";
+	$query .= "where category_id = {$quiz['category_id']} AND status ='approved' ";
 	$query .= "order by rand() limit {$questions_per_quiz}; ";
 	$random_selected_question_set = mysqli_query($connection, $query);
 	confirm_query($random_selected_question_set); //get random selected questions from the category
