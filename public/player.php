@@ -28,7 +28,7 @@ $player=find_player_by_id ($_SESSION["player_id"]);
 <?php $layout_context = "player"; ?>
 <?php include("../includes/layouts/header.php"); ?>
 
-<div id="main" class="wrapper">
+<div id="main">
   <div id="navigation">
 	<br></br>
 	<h2><a href="player_profile.php">
@@ -42,7 +42,7 @@ $player=find_player_by_id ($_SESSION["player_id"]);
 		<li><a href="player_logout.php">Logout</a></li>
 		</ul>
   </div>
-  <div id="page" >
+  <div id="page" class="wrapper">
 <?php echo message(); ?>
 
     <h2>Player Dashboard</h2>
