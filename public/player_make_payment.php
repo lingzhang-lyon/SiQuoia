@@ -14,7 +14,8 @@
 		$amount=$_POST["amount"];
 		//update credits
 		$query  = "UPDATE players SET ";
-		$query .= "credits = {$amount} + {$credits} ";
+		$query .= "credits = {$amount} + {$credits}, ";
+		$query .= "membership = 'standard' ";
 		$query .= "WHERE id ={$_SESSION['player_id']}; ";
 		$result = mysqli_query($connection, $query);
 		confirm_query($result);

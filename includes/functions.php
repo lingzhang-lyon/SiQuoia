@@ -590,31 +590,31 @@
 		echo "</select>";
 	}
 	
-	function quiz_question_for_selection($quiz_question){ //$quiz_question is a tuple array of question, include all the info about this question
+	function quiz_question_for_selection($quiz_question,$count=0){ //$quiz_question is a tuple array of question, include all the info about this question
 		
-		
-		$output =htmlentities($quiz_question['question_content']);
-		$output .="<br>";
+		$output ="<table><col width=\"700\"><tr><td>";
+		$output .="<h3>Question".$count."&nbsp </h3>".htmlentities($quiz_question['question_content']);
+		$output .="</td></tr><tr><td>";
 		$output .="<input type='radio' name='answer_for_question_";
 		$output .=htmlentities($quiz_question['id']);
 		$output .="' value=1 />";
 		$output .=htmlentities($quiz_question['option1']);
-		$output .="<br>";
+		$output .="</td></tr><tr><td>";
 		$output .="<input type='radio' name='answer_for_question_";
 		$output .=htmlentities($quiz_question['id']);
 		$output .="' value=2 />";
 		$output .=htmlentities($quiz_question['option2']);
-		$output .="<br>";
+		$output .="</td></tr><tr><td>";
 		$output .="<input type='radio' name='answer_for_question_";
 		$output .=htmlentities($quiz_question['id']);
 		$output .="' value=3 />";
 		$output .=htmlentities($quiz_question['option3']);
-		$output .="<br>";
+		$output .="</td></tr><tr><td>";
 		$output .="<input type='radio' name='answer_for_question_";
 		$output .=htmlentities($quiz_question['id']);
 		$output .="' value=4 />";
 		$output .=htmlentities($quiz_question['option4']);
-		$output .="<br>";
+		$output .="</td></tr></table></br>";
 		return $output;
 	}
 	
@@ -623,11 +623,11 @@
 		//$quiz_question is a tuple array of question, 
 		//include all the info about this question and player's answer about this question in the quiz
 		//$count is the sequence of question in the result list
-	
-	 	$output  = "<h3>Question".$count."&nbsp";
+	    $output ="<table><col width=\"700\"><tr><td>";
+	 	$output .= "<h3>Question".$count."&nbsp";
 		$output .="</h3>";
-		//$output .="</h3>";
 		$output .=htmlentities($quiz_question['question_content']);
+		$output .="</td></tr><tr><td>";
 		$output .="<ol>";
 		$output .="<li> ";
 		$output .=htmlentities($quiz_question['option1']);
@@ -642,12 +642,13 @@
 		$output .=htmlentities($quiz_question['option4']);
 		$output .="</li> ";
 		$output .="</ol>";
+		$output .="</td></tr><tr><td>";
 		$output .="The correct answer is ";
 		$output .=htmlentities($quiz_question['correct_option']);
 		$output .="; &nbsp; ";
 		$output .="Your answer is ";
 		$output .=htmlentities($quiz_question['player_answer']);
-		$output .="<br></br> ";
+		$output .="</td></tr></table></br>";
 
 		return $output;
 	}
@@ -656,14 +657,14 @@
 		
 		
 		
-		
-		
-		
-		
-		
-		
 	
 //end of functions of views-------------------------------------------------------------------------------
+	
+
+	
+	
+	
+	
 	
 	
 	

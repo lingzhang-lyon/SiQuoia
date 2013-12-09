@@ -30,6 +30,7 @@ Ling
 ---solved by ling 2013/12/08 use java script
 
 //***player's points was not changed accordingly
+---solved by ling 2013/12/08
 
 
 3 player_quiz_result.php
@@ -44,4 +45,18 @@ Ling
 2013-12-5 ling
 
 1.online test
-*****could not choose quiz!!!!
+//*****could not choose quiz!!!!
+
+
+2013-12-8 ling
+1.player.php
+//****leaderboard could not show
+---solved by ling 2013/12/08
+
+2. player_choose_quiz.php
+//if player is trial, should can choose quiz once
+--solved 2013/12/8 by ling 
+-- every member (trial and standard) can choose quiz once for free
+-- member don't have enough credits could not choose quiz
+
+

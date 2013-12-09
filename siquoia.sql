@@ -3,17 +3,19 @@ CREATE TABLE `admins` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(50) NOT NULL,
   `hashed_password` varchar(60) NOT NULL,
-  PRIMARY KEY (`id`),
-) 
+  PRIMARY KEY (`id`)
+);
 
 -- Insert data into table `admins`
 
-INSERT INTO admins(username, hashed_password) VALUES 
-('Bingyu','$2y$10$MzA0ODVlNTg0YTU1N2FhYeDzei3UNykWTTMN0E4G/siiXgkyp4r6y'),
-('Daniel','$2y$10$YzgxOTQxZTI4MzhkNGEyNOYkbU1q/0QhY/mJPgsimdsbFtmyhZ95C '),
-('Ling','$2y$10$Yzg0MjE4ZGVhOWFjMGM1Z./EIP6QvoyNdokfY7F5y7WpsBQbmR/De'),
-('Sai','$2y$10$M2YxODQzZjY1ZDYxMDI0OO38thKXhmplxJwYVVdxjXkHn9pWSzhpK'),
-('Steven','$2y$10$NjQwY2M0Mzg1MzJjMDZmYe6Uqk8goOGvgDp8kK1i5r/ClXiUacUBm');
+insert INTO admins (username, hashed_password)
+VALUES 
+(1,'Bingyu','$2y$10$MzA0ODVlNTg0YTU1N2FhYeDzei3UNykWTTMN0E4G/siiXgkyp4r6y'),
+(2,'Binh','$2y$10$YWZmNWUyODYxYzYyZjY3N.cVnsN4XYN0d/.NTbLdnkRj5UBdpbfQm'),
+(3,'Daniel','$2y$10$YzgxOTQxZTI4MzhkNGEyNOYkbU1q/0QhY/mJPgsimdsbFtmyhZ95C '),
+(4,'Ling','$2y$10$Yzg0MjE4ZGVhOWFjMGM1Z./EIP6QvoyNdokfY7F5y7WpsBQbmR/De'),
+(5,'Sai','$2y$10$M2YxODQzZjY1ZDYxMDI0OO38thKXhmplxJwYVVdxjXkHn9pWSzhpK'),
+(6,'Steven','$2y$10$NjQwY2M0Mzg1MzJjMDZmYe6Uqk8goOGvgDp8kK1i5r/ClXiUacUBm');
 
 -- Table structure for table `pages`
 DROP TABLE IF EXISTS `pages`;
@@ -26,7 +28,7 @@ CREATE TABLE `pages` (
   `content` text,
   PRIMARY KEY (`id`),
   KEY `subject_id` (`subject_id`)
-) 
+); 
 
 -- Insert data into table `pages`
 
@@ -42,7 +44,7 @@ CREATE TABLE `subjects` (
   `menu_name` varchar(30) NOT NULL,
   `position` int(3) NOT NULL,
   `visible` tinyint(1) NOT NULL,
-  PRIMARY KEY (`id`),
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 -- Insert data into table `subjects`
@@ -59,9 +61,12 @@ CREATE TABLE players (
  membership MEDIUMTEXT NOT NULL, 
  points int Default NULL,
  credits int Default NULL,
- rank int Default NULL, 
+ rank int Default NULL,
+ sample_taken bit default 0, 
  PRIMARY KEY (id)
 ); 
+
+-- two membership trial , standard 
 
 Show columns from players;
 
@@ -125,8 +130,8 @@ FOREIGN KEY (category_id) REFERENCES categories(id)
 INSERT INTO  questions (id,player_id, question_content,option1, option2, option3, option4,correct_option,status,category_id, level) 
 VALUES (1, 4, 'what is 1+1?','is 1','is 2','is 3','is 4','2','approved', 3, 0);
 
---Quiz, quiz_question, question_playeranswer
---2modes:Challenge and Learning
+-- Quiz, quiz_question, question_playeranswer
+-- 2modes:Challenge and Learning
 
 DROP TABLE IF EXISTS quiz;
 CREATE TABLE quiz (
@@ -135,6 +140,7 @@ mode varchar(50) default 'Learning',
 quiz_date timestamp not NULL,
 player_id int Default NULL,
 category_id int Default NULL,
+correct_rate double Default 0,
 PRIMARY KEY (id),
 FOREIGN KEY (player_id) REFERENCES players(id),
 FOREIGN KEY (category_id) REFERENCES categories(id)
@@ -460,3 +466,4 @@ be predicted for simple diffusion. Which of the following models best explains v
 'Vesicles, by virtue of their net negative charge, are attracted to positively charged regions of the cell.', 
 'Vesicles are attached to the protein kinesin, which slides along microtubules by an ATPdependent process.', 
 '4','approved', 13, 0);
+

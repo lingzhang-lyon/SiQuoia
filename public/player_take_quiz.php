@@ -5,6 +5,7 @@
 <?php confirm_player_logged_in(); 
 	$player = find_player_by_id ($_SESSION["player_id"]);
 	$quiz=find_quiz_by_id($_SESSION["quiz_id"]);
+	$category=find_category_by_id($quiz["category_id"]);
 	?>
 
 <?php	
@@ -124,14 +125,14 @@ window.onload=function(){
 		<?php echo message(); ?>
 		<?php echo form_errors($errors); ?>
 		
-		<h2>Taking your quiz now <?php echo htmlentities($player["username"]); ?></h2>
+		<h2>Taking your quiz in <?php echo htmlentities($category["category_name"]); ?> now, <?php echo htmlentities($player["username"]); ?></h2>
 	<?php 
 		if ($quiz['mode']=='challenge') { ?>
 		 <h3> You are in challenge mode</h3>
 		<div id="timer1" style="color:red; font-size:18px"></div>
 	<?php }
 		else{ ?>
-		<h3> You are in challenge mode</h3>
+		<h3> You are in learning mode</h3>
 	<?php } ?>
 
 		<form action="player_take_quiz.php" method="post">
@@ -140,8 +141,7 @@ window.onload=function(){
 		   $quiz_question_set = find_questions_by_quiz_id($_SESSION["quiz_id"]);
 		    $count=1;
 			while ($quiz_question=mysqli_fetch_assoc($quiz_question_set)){
-				echo "</br> Question".$count." :&nbsp";
-				echo quiz_question_for_selection($quiz_question);
+				echo quiz_question_for_selection($quiz_question,$count);
 				$count++;
 			}
 		?>

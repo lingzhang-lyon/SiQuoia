@@ -40,8 +40,7 @@
 			
 		<?php } else { ?>
 			
-			<p>Welcome!</p>
-		    <img src="images/Intelligence.jpg" width="480" height="400" >
+		    <img src="images/Intelligence.jpg" width="900" height="600" >
 			
 		<?php }?>
   </div>
