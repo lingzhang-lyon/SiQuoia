@@ -8,10 +8,12 @@
 	
 ?>
 <?php	
+	$questions_per_quiz=5;  //now we just show 5 questions, later could change to 10 or 100
+
 	
 	$query  = "select id, category_id from questions ";
 	$query .= "where category_id = {$quiz['category_id']} ";
-	$query .= "order by rand() limit 5; ";          //now we just show 5 questions, later could change to 10 or 100
+	$query .= "order by rand() limit {$questions_per_quiz}; ";
 	$random_selected_question_set = mysqli_query($connection, $query);
 	confirm_query($random_selected_question_set); //get random selected questions from the category
 	

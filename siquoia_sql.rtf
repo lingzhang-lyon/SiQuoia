@@ -481,6 +481,17 @@ INSERT INTO  questions (id,player_id, question_content,option1, option2, option3
 \f0\fs22 \cf6 ',\
 '4','approved', 8, 0);\cf4 \
 \
+\
+\
+--\
+--add 2013/12/8\
+--\
+\
+\pard\pardeftab720\ri-720\sl276\slmult1\ql\qnatural
+\cf0 ALTER TABLE quiz\
+ADD correct_rate double default 0;\cf4 \
+\pard\pardeftab720\ri0\sl276\slmult1\ql\qnatural
+\cf4 \
 ---\
 ---test SQL\
 ---\

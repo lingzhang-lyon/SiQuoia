@@ -52,7 +52,7 @@
 <?php echo message(); ?>
 <?php echo form_errors($errors); ?>
 
-<h2>Imput your payment information: <?php echo htmlentities($player["username"]); ?></h2>
+<h2>Please select your payment: <?php echo htmlentities($player["username"]); ?></h2>
 <form action="player_make_payment.php" method="post">
 
 <p>Payment amount:

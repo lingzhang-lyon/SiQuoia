@@ -8,7 +8,7 @@ Ling
 //insert into quiz success  but reduce players credits failed
 //should roll back
 
-** solved partially,  make reduce players credits work
+---solved partially,  make reduce players credits work
 
 
 2013-12-5 Ling
@@ -27,6 +27,10 @@ Ling
 //player could not take this quiz again.
 
 //***could not count time  in challenge mode
+---solved by ling 2013/12/08 use java script
+
+//***player's points was not changed accordingly
+
 
 3 player_quiz_result.php
 //wrapper could not work, the footer not alwasy be the bottom

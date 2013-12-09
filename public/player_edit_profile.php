@@ -54,14 +54,14 @@ if (isset($_POST['submit'])) {
 
 
 <?php include("../includes/layouts/header.php"); ?>
-<div class="hlinks">
-   <a href="player.php"><span class="text">Back</span></a>
-</div>
-</div>
+
 
 <div id="main">
   <div id="navigation">
-    &nbsp;
+<br />
+<a href="player.php">&laquo; Back</a><br />
+
+<br />
   </div>
 
   <div id="page">

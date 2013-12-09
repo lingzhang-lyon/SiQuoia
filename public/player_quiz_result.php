@@ -4,26 +4,14 @@
 <?php require_once("../includes/validation_functions.php"); ?>
 <?php confirm_player_logged_in(); 
 	$player = find_player_by_id ($_SESSION["player_id"]);
+	$quiz =find_quiz_by_id ($_GET["quizId"]);
 	?>
 
 
-<?php
-	$player_id = $_SESSION["player_id"];
-	$quiz_id = $_GET["quizId"];
+<?php	
 
-	$player_answered_question_set=find_player_answered_questions($quiz_id);
-	$count=0; 
-	$correct_count=0;
-	while ($quiz_question=mysqli_fetch_assoc($player_answered_question_set)){
-	    if($quiz_question['correct_option']===$quiz_question['player_answer']){
-			$correct_count++;
-		}
-		$count++;
-	}
-	if ($count!=0){
-	$correct_rate=(double)100*$correct_count/$count;
-	}
-	else $correct_rate=0;
+	$correct_rate=$quiz["correct_rate"];
+	
 ?>
 
 <?php $layout_context = "player"; ?>
@@ -40,10 +28,10 @@
 
 		
 		<h2><?php echo htmlentities($player["username"]); ?>, The results of the quiz you have taken are: </h2>
-		<h3> Correct Rate:<?php echo htmlentities($correct_rate); ?> % </h3>
+		<h3> Correct Rate:<?php echo htmlentities(100*$correct_rate); ?> % </h3>
 
        <?php		    
-		   $player_answered_question_set=find_player_answered_questions($quiz_id);
+		   $player_answered_question_set=find_player_answered_questions($quiz['id']);
 		   $count=1;
 			while ($quiz_question=mysqli_fetch_assoc($player_answered_question_set)){
 				echo quiz_question_for_result($quiz_question, $count);

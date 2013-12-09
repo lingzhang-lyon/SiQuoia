@@ -405,6 +405,35 @@
 	}
 
 	
+	function correct_rate_for_quiz($player_id,$quiz_id){
+		$player_answered_question_set=find_player_answered_questions($quiz_id);
+		$count=0; 
+		$correct_count=0;
+		while ($quiz_question=mysqli_fetch_assoc($player_answered_question_set)){
+			if($quiz_question['correct_option']===$quiz_question['player_answer']){
+				$correct_count++;
+			}
+			$count++;
+		}
+		if ($count!=0){
+			$correct_rate=(double)$correct_count/$count;
+		}
+		else $correct_rate=0;
+		return $correct_rate;
+	}
+	
+	function accumulated_points_for_quiz($player_id,$quiz_id,$points_for_each_corrent=10){
+		$player_answered_question_set=find_player_answered_questions($quiz_id);
+		$count=0; 
+		$correct_count=0;
+		while ($quiz_question=mysqli_fetch_assoc($player_answered_question_set)){
+			if($quiz_question['correct_option']===$quiz_question['player_answer']){
+				$correct_count++;
+			}
+		}
+		return $points_for_each_corrent * $correct_count;
+	}
+	
 //functions for views ---------------------------------------------------------------------------------:	
 	
 	// navigation takes 2 arguments
