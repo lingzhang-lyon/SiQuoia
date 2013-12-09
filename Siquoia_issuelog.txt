@@ -47,6 +47,9 @@ Ling
 1.online test
 //*****could not choose quiz!!!!
 
+---solved by ling 12/8/2013 
+--it's due to quiz table schema not completed, and players table schema was not updated.
+
 
 2013-12-8 ling
 1.player.php

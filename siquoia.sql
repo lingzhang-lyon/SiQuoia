@@ -3,7 +3,8 @@ CREATE TABLE `admins` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(50) NOT NULL,
   `hashed_password` varchar(60) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  unique(username)
 );
 
 -- Insert data into table `admins`
@@ -63,7 +64,8 @@ CREATE TABLE players (
  credits int Default NULL,
  rank int Default NULL,
  sample_taken bit default 0, 
- PRIMARY KEY (id)
+ PRIMARY KEY (id),
+ unique(username)
 ); 
 
 -- two membership trial , standard 

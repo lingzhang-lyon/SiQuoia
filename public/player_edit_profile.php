@@ -71,15 +71,21 @@ if (isset($_POST['submit'])) {
     <h2>Edit Your Profile: <?php echo htmlentities($player["username"]); ?></h2>
     <form action="player_edit_profile.php?id=<?php echo urlencode($_SESSION['player_id']); ?>" method="post">
 
-		<p>Player Name<br></br>
+		<p><h3>Player Name</h3>&nbsp;
 		<input type="text" name="player_name" value="<?php echo htmlentities($player['username']); ?>" />
 		</p>		
 
-		<p>Password<br></br>
+		<p><h3>Password</h3>&nbsp;
 		<input type="password" name="password" value="" />
 		</p>
-		<p>Membership<br></br>
+        <p><h3>Membership</h3> &nbsp;
 		<?php echo htmlentities($player["membership"]); ?>
+		</p>
+		<p><h3>Credits Banlance</h3> &nbsp;
+		<?php echo htmlentities($player["credits"]); ?>
+		</p>
+		<p><h3>Points</h3> &nbsp;
+		<?php echo htmlentities($player["points"]); ?>
 		</p>
 		
 		<input type="submit" name="submit" value="Edit Player" class="blue" />

@@ -489,7 +489,20 @@ INSERT INTO  questions (id,player_id, question_content,option1, option2, option3
 \
 \pard\pardeftab720\ri-720\sl276\slmult1\ql\qnatural
 \cf0 ALTER TABLE quiz\
-ADD correct_rate double default 0;\cf4 \
+ADD correct_rate double default 0;\
+\
+\pard\pardeftab720\ri-720\sl276\slmult1\ql\qnatural
+\cf0 ALTER TABLE players\
+ADD sample_taken bit default 0;\
+\pard\pardeftab720\ri-720\sl276\slmult1\ql\qnatural
+\cf4 \
+\pard\pardeftab720\ri-720\sl276\slmult1\ql\qnatural
+\cf0 ALTER TABLE players\
+ADD unique (username);\
+\
+ALTER TABLE admins\
+ADD unique (username);\cf4 \
+\
 \pard\pardeftab720\ri0\sl276\slmult1\ql\qnatural
 \cf4 \
 ---\
@@ -508,4 +521,8 @@ Q.correct_option, QP.quiz_id, QP.player_answer\
 from questions Q,question_playeranswer QP\
 where QP.quiz_id=13\
 and Q.id=QP.question_id;\
-}
+\
+\
+insert into quiz (player_id, category_id) values (4, 8);\
+\
+show columns from quiz;}
