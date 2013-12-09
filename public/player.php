@@ -39,7 +39,6 @@ $player=find_player_by_id ($_SESSION["player_id"]);
 		<li><a href="player_new_question.php">Submit New Questions</a></li>
 		<li><a href="player_edit_profile.php">Edit Your Profile</a></li>
 		<li><a href="player_make_payment.php">Make A Payment</a></li>
-		<li><a href="redeem_credits.php">Redeem Your Credits</a></li>
 		<li><a href="player_logout.php">Logout</a></li>
 		</ul>
   </div>

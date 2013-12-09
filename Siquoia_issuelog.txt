@@ -62,4 +62,6 @@ Ling
 -- every member (trial and standard) can choose quiz once for free
 -- member don't have enough credits could not choose quiz
 
+3. redeem points feature not implemented
 
+4. edit category and add category feture not added.
